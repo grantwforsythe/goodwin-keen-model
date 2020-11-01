@@ -1,0 +1,73 @@
+\documentclass[12pt, centerh1]{article}
+\textwidth=165mm \headheight=0mm \headsep=10mm \topmargin=-10mm
+\textheight=230mm %\footskip=1.5cm
+\oddsidemargin=0mm
+%\documentclass[12pt,letterpaper]{article}
+%\usepackage[margin=1in]{geometry}
+\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{amsmath, amssymb,natbib}
+%\usepackage[mathscr]{euscript}
+%\usepackage{mathrsfs}
+\usepackage{graphicx,bm}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{subcaption}
+ \usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage[mathscr]{euscript}
+\usepackage{relsize}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{rotating}
+\usepackage{eurosym}
+\usepackage{colonequals}
+\usepackage{bbm}
+\usepackage{lscape}
+
+
+
+\title{Modelling $k$-armed Bandit Problems in Casinos  }
+\author{\qquad Nikola Po\v cu\v ca$^{1,2}$ \qquad\  Daniel Presta$^{2}$ \qquad\  Kevin Zhang$^{2}$ \\ Obiwon Kenobi$^{3}$}
+
+
+
+\date{{\small $^1$ MacDATA Institute, McMaster University, Ontario, Canada.\\[-6pt]
+$^2$ Department of Mathematics \& Statistics, McMaster University, Ontario, Canada.\\[-6pt]
+$^3$ Jedi High Council, Coruscant, Galactic Republic.
+}
+}
+\linespread{1.5}
+\pdfminorversion=4
+
+\begin{document}
+
+% makes title
+\maketitle
+
+\textit{The introduction lays out a foundation for the research proposal, it introduces the model THROUGH the problem itself, not just simply describes the model. The introduction should be loaded with references of previous research past, be sure to use bibtex and carefully cite things. Remember there is a difference between using cite and citep. Any statement you make that is not common knowledge, must be cited accordingly. \\ DISCLAIMER: I do not promote gambling, I am merely using this as an example.}
+\newpage
+\section{Introduction}
+% you do not need an indent to start off a section
+Casino slot machines are considered to be the easiest, most straight-forward game to play; often inducing mythical belief systems, and illogical fallacies surrounding their reward outcomes on unsuspecting players \citep{turner2004slot}. 
+Slots are considered to be under the definition known as an electronic gaming machine \citep[EGM,][]{hamano1993electronic}. It is often considered that EGMs are frequently the most misunderstood type of gambling. As \cite{wagenaar2016paradoxes} points out, players lack the fundamental understanding of random chance, which play a core role in the programmed reward outcomes of EGMs.
+To rectify this issue, we consider modelling of EGMs and optimizing player reward-outcomes through the $k$-armed bandit problem \citep{thompson1935theory}. First introduced in \cite{thompson1933likelihood}, consider the problem of having $k$-different actions to take. Upon each choice, players are rewarded from a probability distribution dependant on the action selected. The objective, is to maximize the expected reward over time. In the case of EGMs, $k$ actions are considered to be $k$ levers; the rewards, being payouts of the EGM. 
+\newline\newline
+\newpage
+\textit{The proposal should highlight the model itself, any methods you are going to use, and any frameworks both programmatic and theoretical. You should begin your proposal with some sort of statement. Next, discuss the types of methods you are going to use, and how you are going to use them. Finally conclude the proposal on how these methods will in turn answer the question.}
+\newpage
+\section{Proposal}
+Through the framework of reinforcement learning \citep{sutton2018reinforcement}, the $k$-armed bandit problem is thoroughly investigated for the purposes of developing gambling strategies. One of the methods for determining optimal strategies is the action value method. The action value method seeks to estimate expected value of a reward based on a taken action \citep{koulouriotis2008reinforcement}. These estimations are preformed by using previous data. Let $A_t$ be the action taken at time $t$ with the respective award being denoted as $R_t$. The expected value of some action $a$ is given as 
+$$q(a) = \mathbb{E} \{R_t | A_t = a  \}.$$
+We note that $q(a)$ is unknown, hence we want to define a function $Q_t(a)$ that seeks to estimate $q(a)$. One method to consider is using averaging; where
+
+$$ Q_t(a)= \frac{\sum_{t=1}^{t-1} R_t \cdot \mathbbm{1}(A_t = a)}{ \sum_{t=1}^{t-1}R_t.}$$
+
+By the law of large numbers, $\lim_{t \to \infty} Q_t(a) = q(a) $ \citep{hsu1947complete}. Although estimation of these quantities are straightforward the actual strategies to acquire rewards should be mentioned. One particular strategy is to take the maximum expected reward at every time point $t$ known as the greedy algorithm \citep{komiyama2013multi}. Other methods for estimating $Q_t$ can be considered using stochastic gradient ascent to prohibit over-fitting \citep{yuan2019marrying}. 
+
+A ten-armed bandit model is considered with varying reward outcomes using Gaussian distributions of varying means as the true reward generators. The experiment is conducted using $4000$ simulations to test the greedy reward strategy. In addition, the gradient ascent is also considered. Conclusions drawn from the simulation study seek to provide players with an optimal strategy for playing EGMs, thus rendering the casino bankrupt. Finally, non-stationary reward distributions are considered as a possible extension to the model where reward distributions change over time.
+
+\newpage
+\bibliographystyle{chicago}
+\bibliography{casino}
+\end{document}
+

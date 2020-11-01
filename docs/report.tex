@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+\usepackage[nottoc]{tocbibind}
+\usepackage{tocloft}
+\usepackage{blindtext}
+% \documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.3in]{geometry}
+\usepackage{amssymb,latexsym,amsmath,setspace,amsfonts,amssymb,amscd}
+\setlength\parindent{0pt}
+\setlength{\parskip}{\baselineskip}
+\usepackage[colorlinks=true,allcolors=black]{hyperref}
+\usepackage[english]{babel} 
+\usepackage[normalem]{ulem}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage[super]{nth}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage{bm}
+\usepackage[english]{babel}
+
+\usepackage{hyperref}
+\hypersetup{
+    % colorlinks=true,
+    % linkcolor=blue,
+    % filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{graphicx} %package to manage images
+\graphicspath{ {images/} }
+
+\pagestyle{plain}
+\fancyhf{}
+\lhead{test} %change the number 
+\rhead{\today} % put your name and student number here
+\rfoot{\thepage}
+% \setlength{\headheight}{15pt}
+
+
+% \renewcommand{\bibsection}{\section*{References}}
+\renewcommand{\contentsname}{\hfill\bfseries\Large Contents\hfill}   
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftsecfont}{}% Remove \bfseries from section titles in ToC
+\renewcommand{\cftsecpagefont}{}
+
+\begin{document}
+
+% https://www.latextemplates.com/template/formal-book-title-page
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR(S) 
+%----------------------------------------------------------------------------------------
+\begin{titlepage} % Suppresses headers and footers on the title page
+
+	\centering % Centre everything on the title page
+	
+	\scshape % Use small caps for all text on the title page
+	
+	\vspace*{\baselineskip} % White space at the top of the page
+	
+	%------------------------------------------------
+	%	Title
+	%------------------------------------------------
+	
+	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal rule
+	\rule{\textwidth}{0.4pt} % Thin horizontal rule
+	
+	\vspace{0.75\baselineskip} % Whitespace above the title
+	{\LARGE MACHINE LEARNING: }\\
+% 	\vspace{0.2\baselineskip}   
+	{\LARGE A BRIEF INTRODUCTION\\} %A DEEPER LOOK\\ INTO\\ MACHINE LEARNING\\} % Title
+	\vspace{0.45\baselineskip}
+	{\LARGE TO DEEP LEARNING}
+	\vspace{0.75\baselineskip} % Whitespace below the title
+	
+	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} % Thin horizontal rule
+	\rule{\textwidth}{1.6pt} % Thick horizontal rule
+	
+	\vspace{2\baselineskip} % Whitespace after the title block
+	
+	%------------------------------------------------
+	%	Editor(s)
+	%------------------------------------------------
+	
+% 	Written By
+    \begin{center}
+    
+    \vspace{0.5\baselineskip} % Whitespace before the editors
+	
+	{\scshape\Large Grant Forsythe\\} % Editor list
+	
+ 	\vspace{0.5\baselineskip} % Whitespace below the editor list
+	
+ 	Group 27\\ % Editor affiliation
+	
+	\vspace{0.5\baselineskip} % Whitespace below the editor list
+	
+	\textit{McMaster University}\\ % Editor affiliation
+	
+	\vspace{0.75\baselineskip}
+	October 23, 2020
+% 	\vfill % Whitespace between editor names and publisher logo
+	\end{center}
+	
+\end{titlepage}
+
+% \tableofcontents % Print the table of contents
+
+% \listoffigures % Print the list of figures
+
+% \listoftables % Print the list of tables
+\clearpage
+
+% \clearpage\maketitle
+% \thispagestyle{empty}
+% \newpage
+
+% \thispagestyle{empty}
+% \setcounter{page}{}
+% \tableofcontents
+% \newpage\listoffigures
+% \newpage\listoftables
+% \clearpage
+
+\newpage
+\section*{Introduction}
+Over the last few decades, there has been a lot of research in \textbf{artificial intelligence} and \textbf{machine learning}. This is largely due to the availability of very large complex data sets (referred to as \textit{big data}), advancements in computer hardware, and open-source software. In Layman's terms, machine learning is used to find rules to difficult problems given a set of inputs\cite{pythondeeplearning}. \textbf{Deep learning} is a specific method used for finding these rules and is used in a wide range of problems, across various disciplines, such as: natural language processing, speech recognition,  and drug design.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height = 6cm]{subset.png}
+    \caption{A Venn diagram showing that deep learning is a form of machine learning, which is a form of AI.}
+    \label{fig:subset}
+\end{figure}
+The purpose of this group report will be to provide a brief overview of machine learning topics; such as, \textit{big data}, \textit{linear regression}, and \textit{deep learning}. Specifically, this section of the report will focus solely on deep learning.  It will begin by defining the structure of a deep learning model. Next, it will describe a method used to optimize the model,  known as \textit{gradient descent}. Then, it will define an algorithm used to compute the gradient of, known as \textit{back-propagation}.
+\newpage
+\section*{Neural Networks}
+Deep learning finds meaningful patterns in data using \textbf{layers}, with each layer representing a different feature of the data\cite{goodfellow2016deep}. The term deep in deep learning comes from the use of successive layers; where, the number of layers is defined as the \textit{depth} of the model \cite{pythondeeplearning}. The model builds these representations using a collection of artificial \textbf{neurons}, called a \textbf{neural network}\cite{pythondeeplearning}. Like in biology, certain group of neurons cause other groups of neurons to activate.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics{simple.png}
+%     \caption{A simple input/output relationship.\cite{nielsen2015NN}}
+%     \label{fig:simple}
+% \end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height = 6cm]{simpleNN.png}
+    \caption{This is an example of a simple neural network\cite{nielsen2015NN}. Each node represents a neuron.}
+    \label{fig:simpleNN}
+\end{figure}
+A neuron can be thought of as a real-valued function, with its result defined as that neuron's \textbf{activation}\cite{3blue1brown}. There are a finite set of neurons within a given layer in a neural network. All of the neurons in the previous layer are connected to each neuron in the next layer, with the strength of a connection defined as a \textbf{weight} ($w$), where $w\in\mathbb{R}$. The greater the strength of a particular weight, the more impact it will have on that particular neuron.\\ 
+\newline
+Let $\bm{a}^{(j)}=\{a_0^{(j)},a_1^{(j)}\cdots,a_n^{(j)}\}$ represent the activation's for the neurons in the $j^{th}$ layer, with n being the number neurons in that layer. Let the weights for $i^{th}$  neuron in the $j^{th}$ layer be denoted as $\bm{w}_{i,j} = \{w_{i,0},w_{i,1},\cdots,w_{i,n}\}$. Then, a neuron applies a function to the weighted average of a and w, with the result being between 0 and 1\cite{nielsen2015NN}. An example of such a function is the sigmoid function\footnote{In practice, this function isn't used all that much. A popular alternatives is the ReLU function\cite{goodfellow2016deep}.}: 
+\[\sigma(x) = \frac{1}{1+e^{-x}}\]
+There is also \textbf{biases} ($\bm{b}$) associated with each neuron, which is a "gauge of how high the weighted sum needs to be before a neuron is meaningfully activated"\cite{3blue1brown}. Mathematically, a single neuron can be expressed as \cite{nielsen2015NN} : 
+$$\bm{a}^{(j+1)}_i = \sigma(\bm{a}^{(j)}\cdot \bm{w}_{i,j} + b)=\sigma(a_0^{(j)}\cdot w_{i,0} + \cdots + a_n^{(j)} \cdot w_{i,n} + b)$$
+Therefore, a layer in a neural network can be defined as\cite{nielsen2015NN}:
+\[
+   \bm{W} = \begin{bmatrix}
+        $w_{0,0}$ & $w_{0,1}$ & $\cdots$ & $w_{0,n}$\\
+        $w_{1,0}$ & $w_{1,1}$ & $\cdots$ & $w_{1,n}$\\
+        $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$\\
+        $w_{k,0}$ & $w_{k,1}$ & $\cdots$ & $w_{0,n}$
+    \end{bmatrix}, 
+    \bm{a}^{(j)} = \begin{bmatrix}
+        a_0^{(j)}\\
+        a_1^{(j)}\\
+        \vdots\\
+        a_n^{(j)}
+    \end{bmatrix}, 
+    \bm{b} = \begin{bmatrix}
+        b_0\\
+        b_1\\
+        \vdots\\
+        b_n
+    \end{bmatrix}
+\]
+\begin{equation}\label{NN}
+    \bm{a}^{(j+1)} = \sigma(\bm{W}\bm{a}^{(j)}+\bm{b})
+\end{equation}
+The processing of finding the appropriate weights and biases that best fit the data is defined as a \textbf{learning} algorithm. Given weights and biases, an optimization algorithm is used to minimize some \textit{objective function}\footnote{Some texts also refer to an objective function as the \textit{loss} or \textit{cost} function.}. An example of such an algorithm is \textbf{gradient descent}.
+\section*{Gradient Descent \& Back-Propagation}
+In order for a deep learning model to produce any meaningful results, there has to be two sets of data: a \textbf{training} data set and a \textbf{test} data set. The purpose of the training data set is to find weights and biases. It contains sets of inputs ($x$) and desired outputs ($y(x)$), which is the activation values of neurons in the input and output layers respectively. Unlike the training data, the test data set only contains inputs with the purpose of predicting outputs given the weights and biases ($\hat{y}(x,\bm{W},\bm{b})$)\footnote{For simplicity, $\hat{y}(x,\bm{W},\bm{b})$ will be abbreviate as $\hat{a}$.  }\cite{nielsen2015NN}.\\
+\newline
+The \textit{mean squared error} (MSE) is a cost function that calculates the average distance between the desired output and the predicted output. Cost functions are used to measure how accurately a model is in generating outputs. Redefine n as the total number of training inputs and define a quadratic \textit{cost function} (C) as\cite{nielsen2015NN}:
+\begin{equation}\label{MSE}
+    C(\bm{W},\bm{b}) = \frac{1}{2n}\sum_x(y(x)-\hat{a})^2
+\end{equation}
+To put things into perspective, consider the plot below.
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[height= 5cm]{linear_regression.png}
+    \caption{This is a simple linear regression model\cite{james2013introduction}. The blue line represents the predicted values, defined as the \textit{line of best fit}, and the red points represent the actual values. The blue line is fitted by minimizing the MSE, with the distance between the values represented by the grey vertical lines.  (Refer to Xiang Li's section of the report where he defines linear regression.)}
+\end{figure}
+One method for finding a global minimum involves calculating all of the \textit{extremums}, computing the derivatives at that point, and comparing\footnote{Aside: Dr. Madnick has excellent notes on \href{https://sites.google.com/view/2xx3-winter20/unit-ii/chapter-5/sections-5-3-5-4?authuser=0}{critical points and optimization} for futher reading.}. However, this method won't work on a larger scale as its computationally expensive\footnote{Some of the largest neural networks have \emph{billions} of weights and biases\cite{nielsen2015NN}.}. A better method uses the gradient of a function ($\nabla C$), which is just a vector of first order \textit{partial derivatives}. An important proposition is that $-\nabla C$ is always in the direction of steepest descent\footnote{\href{https://youtu.be/TEB2z7ZlRAw}{Proof}.}. (Hence the name of the algorithm). \textbf{Back-propagation} is a specific algorithm used to analytically compute the gradient, which is how the model actually learns.
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[height = 7cm]{approx_min.png}
+%     \caption{gradient descent\cite{3blue1brown}.}
+% \end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height= 5cm]{gradient_of_descent.png}     
+    \caption{A simple graph  in $\mathbb{R}^3$ of a function (C) which takes two arguments, $v_1$ and $v_2$. The green dot is pointing in the direction of steepest descent\cite{nielsen2015NN}.}
+\end{figure}
+% \astfootnote{This seems less like science fiction and more like calculus!}
+\newpage
+
+% \section*{Back-propagation}
+% \addcontentsline{toc}{section}{Deep Learning}
+\begin{figure}[h]
+    \centering
+    \includegraphics{backpropagation.png}
+    \caption{The flow diagram of a deep learning model\cite{pythondeeplearning}.}
+    \label{fig:my_label}
+\end{figure}
+
+Back-propagation is a fast, flexible algorithm that works backwards from the output layer given a loss score by successively applying the \textit{chain rule}\footnote{In Leibniz's notation: $\frac{dy}{dx}=\frac{dy}{dt}\frac{dt}{dx}$. Likewise, in Newton's notation: $(f\circ g)^{'}(x) = g^{'}(f(x))\cdot f^{'}(x)$} \cite{goodfellow2016deep} to compute the gradient. Essentially, the algorithm is trying to figure out the contributions each weight and bias has in generating that particular loss score\footnote{The loss score is just the result of the cost funtion.}. The adjustments made in the weights and biases is proportional of how far the predicted output is from the actual results\cite{3blue1brown}.  
+
+
+\newpage
+
+\bibliographystyle{vancouver}
+\bibliography{bibliography.bib}
+
+\end{document}
