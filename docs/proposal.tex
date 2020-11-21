@@ -12,7 +12,7 @@
 \usepackage{color}
 \usepackage{subcaption}
 \usepackage{subcaption}
- \usepackage[table]{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{longtable}
 \usepackage{amsthm}
 \usepackage[mathscr]{euscript}
@@ -23,51 +23,78 @@
 \usepackage{colonequals}
 \usepackage{bbm}
 \usepackage{lscape}
+\usepackage{physics}
 
+\usepackage{nomencl}
+\makenomenclature
 
+\title{The Evolution of the Goodwin Economics Model}
+\author{\qquad Romi Lifshitz$^{1}$ \qquad\  Arthur M\'endez-Rosales$^{2}$ \qquad\  Sara Saad$^{3}$ \\ Grant Forsythe$^{4}$ \qquad Ghida M. Mourtada$^{4}$ \qquad Jacob Ronen Keffer$^{5}$}
 
-\title{Modelling $k$-armed Bandit Problems in Casinos  }
-\author{\qquad Nikola Po\v cu\v ca$^{1,2}$ \qquad\  Daniel Presta$^{2}$ \qquad\  Kevin Zhang$^{2}$ \\ Obiwon Kenobi$^{3}$}
-
-
-
-\date{{\small $^1$ MacDATA Institute, McMaster University, Ontario, Canada.\\[-6pt]
-$^2$ Department of Mathematics \& Statistics, McMaster University, Ontario, Canada.\\[-6pt]
-$^3$ Jedi High Council, Coruscant, Galactic Republic.
-}
+\date{
+{\footnotesize $^1$ Department of Arts and Science, McMaster University, ON, Canada\\[-6pt]
+$^2$ Department of Engineering Physics, McMaster University, ON, Canada \\[-6pt]
+$^3$ Department of Electrical and Computer Engineering, McMaster University, ON, Canada\\[-6pt]
+$^4$ Department of Mathematics and Statistics, McMaster University, ON, Canada\\[-6pt]
+$^5$Department of Chemistry and Chemical Biology, McMaster University, ON, Canada\\[-6pt]}
 }
 \linespread{1.5}
 \pdfminorversion=4
 
 \begin{document}
-
 % makes title
-\maketitle
-
-\textit{The introduction lays out a foundation for the research proposal, it introduces the model THROUGH the problem itself, not just simply describes the model. The introduction should be loaded with references of previous research past, be sure to use bibtex and carefully cite things. Remember there is a difference between using cite and citep. Any statement you make that is not common knowledge, must be cited accordingly. \\ DISCLAIMER: I do not promote gambling, I am merely using this as an example.}
-\newpage
-\section{Introduction}
+\clearpage\maketitle
+% \thispagestyle{empty} % removes the page number on the title page
+\setcounter{page}{1}
+\section{Introduction} \label{s:intro}
 % you do not need an indent to start off a section
-Casino slot machines are considered to be the easiest, most straight-forward game to play; often inducing mythical belief systems, and illogical fallacies surrounding their reward outcomes on unsuspecting players \citep{turner2004slot}. 
-Slots are considered to be under the definition known as an electronic gaming machine \citep[EGM,][]{hamano1993electronic}. It is often considered that EGMs are frequently the most misunderstood type of gambling. As \cite{wagenaar2016paradoxes} points out, players lack the fundamental understanding of random chance, which play a core role in the programmed reward outcomes of EGMs.
-To rectify this issue, we consider modelling of EGMs and optimizing player reward-outcomes through the $k$-armed bandit problem \citep{thompson1935theory}. First introduced in \cite{thompson1933likelihood}, consider the problem of having $k$-different actions to take. Upon each choice, players are rewarded from a probability distribution dependant on the action selected. The objective, is to maximize the expected reward over time. In the case of EGMs, $k$ actions are considered to be $k$ levers; the rewards, being payouts of the EGM. 
-\newline\newline
+Exogenous economics models are those that assume the economy is stable and operates in equilibrium, such that only external factors can cause a potential crash \citep{ganti_2019}. However, the real world reflects that a macro-economy can itself destabilize due to internal factors such as wage share, employment rate, and private debt \citep{minsky1992financial}. For this, R. M. Goodwin proposed an endogenous economics model in 1967 that, at its core, mimics Lotka-Volterra prey-predator dynamics \citep{goodwin1982growth}. The extension of Goodwin’s model by \citet{keen1995finance} focused on modeling Hayman Minsky’s “financial instability hypothesis”. In essence, Minsky argues that the economy can fall into a crisis given an accumulation of debt by the private sector \citep{minsky1992financial}. This Goodwin-Keen model looks into the impact of three parameters on a simplified macro economy: employment rate ($\lambda$), wage share ($\omega$), and private debt ($d$) \citep{grasselli2012analysis,maheshwari2015empirical}.
+\section{Proposal} \label{s:proposal}
+Through the framework of endogenous economic fluctuation models \citep{boldrin1990equilibrium}, the potential long-term equilibrium of the Canadian economy is thoroughly investigated for the purposes of assessing the impact of wage share, employment rate, and private debt on economic stability. For the purposes of this project, economic stability is defined as the long-term equilibrium between labour share and employment \citep{weitzman1983some}. To do so, we use the Goodwin growth model and later the extension into the Goodwin-Keen model. While Goodwin’s original model seeks to explain the dynamics between wage share and employment \citep{goodwin1982growth}, Keen’s addendum to incorporate Minsky’s thesis aims to estimate the convergence of the economy to a stable or unstable long-term equilibrium by introducing the role of debt in the private sector \citep{keen1995finance}. These predictions will be made using previous data from Statistics Canada. The following equations describe the Goodwin-Keen model, as per \citet{grasselli2012analysis}. Please refer to the Nomenclature section for a description of used parameters \citep{grasselli2012analysis,maheshwari2015empirical}.
+% Equations are formatted based on Grasselli and Lima 2012, NOT Keen's original publication
+\begin{align*} 
+\centering
+    \dv{\lambda}{t} &= \lambda \cdot \left( \frac{\kappa(1-\omega-rd)}{\nu} - \alpha - \beta - \delta \right)\\ 
+    \dv{\omega}{t} &= \omega \cdot (\Phi(\lambda) - \alpha)\\
+    \dv{d}{t} &= d\cdot\left(r-\frac{\kappa(1-\omega-rd)}{\nu}+\delta\right)+\kappa(1-\omega-rd)-(1-\omega) 
+\end{align*}
+
+\noindent We note that $\lambda(t)$ and $\omega(t)$ are unknowns; hence, we want to determine their behaviour as functions of time based on a set of initial conditions $(\lambda_0,\omega_0)$. Knowing these, we can assess the economic stability as defined by:
+\begin{equation*}
+    \begin{split}
+        \bm{\varepsilon}=\lim_{t\to\infty}[\lambda(t), \omega(t)]
+        % \label{eq:stability}
+    \end{split}
+\end{equation*}
+
+\noindent Our research project will focus on studying the long-term equilibrium impact that these real variables can have on the simplified macro-economy. To study the long-term dynamics of the models, we will test each model at various initial conditions and conduct sensitivity analysis to systematically test the effects of parameter values on the equilibrium (e.g. the population growth rate and labour productivity). Finally, we plan to determine regions of convergence towards equilibrium by using phase plane analysis to evaluate the stability of the system.
+
+
 \newpage
-\textit{The proposal should highlight the model itself, any methods you are going to use, and any frameworks both programmatic and theoretical. You should begin your proposal with some sort of statement. Next, discuss the types of methods you are going to use, and how you are going to use them. Finally conclude the proposal on how these methods will in turn answer the question.}
-\newpage
-\section{Proposal}
-Through the framework of reinforcement learning \citep{sutton2018reinforcement}, the $k$-armed bandit problem is thoroughly investigated for the purposes of developing gambling strategies. One of the methods for determining optimal strategies is the action value method. The action value method seeks to estimate expected value of a reward based on a taken action \citep{koulouriotis2008reinforcement}. These estimations are preformed by using previous data. Let $A_t$ be the action taken at time $t$ with the respective award being denoted as $R_t$. The expected value of some action $a$ is given as 
-$$q(a) = \mathbb{E} \{R_t | A_t = a  \}.$$
-We note that $q(a)$ is unknown, hence we want to define a function $Q_t(a)$ that seeks to estimate $q(a)$. One method to consider is using averaging; where
 
-$$ Q_t(a)= \frac{\sum_{t=1}^{t-1} R_t \cdot \mathbbm{1}(A_t = a)}{ \sum_{t=1}^{t-1}R_t.}$$
-
-By the law of large numbers, $\lim_{t \to \infty} Q_t(a) = q(a) $ \citep{hsu1947complete}. Although estimation of these quantities are straightforward the actual strategies to acquire rewards should be mentioned. One particular strategy is to take the maximum expected reward at every time point $t$ known as the greedy algorithm \citep{komiyama2013multi}. Other methods for estimating $Q_t$ can be considered using stochastic gradient ascent to prohibit over-fitting \citep{yuan2019marrying}. 
-
-A ten-armed bandit model is considered with varying reward outcomes using Gaussian distributions of varying means as the true reward generators. The experiment is conducted using $4000$ simulations to test the greedy reward strategy. In addition, the gradient ascent is also considered. Conclusions drawn from the simulation study seek to provide players with an optimal strategy for playing EGMs, thus rendering the casino bankrupt. Finally, non-stationary reward distributions are considered as a possible extension to the model where reward distributions change over time.
+\nomenclature[01]{$\lambda$}{Employment rate}
+\nomenclature[02]{$\omega$}{Wage share}
+\nomenclature[03]{$d$}{Debt ratio}
+\nomenclature[05]{$L$}{Total labour employed}
+\nomenclature[04]{$N$}{Total labour force}
+\nomenclature[06]{$w$}{Real wages per unit of labour}
+\nomenclature[07]{$a$}{Labour productivity}
+\nomenclature[08]{$D$}{Amount of debt in real terms}
+\nomenclature[09]{$Y$}{Total yearly Output}
+\nomenclature[10]{$K$}{Capital stock}
+\nomenclature{$\kappa$}{Fixed acceleration relation for the total real capital stock}
+\nomenclature{$\beta$}{The population growth rate}
+\nomenclature{$\delta$}{Constant depreciation rate}
+\nomenclature{$\alpha$}{The exponential growth of disembodied productivity growth rate, Technological growth}
+\nomenclature{$r$}{Constant real interest rate}
+\nomenclature{$\Phi(\lambda)$}{Non-linear function of the rate of employment, Phillips curve}
 
 \newpage
 \bibliographystyle{chicago}
-\bibliography{casino}
+\bibliography{bibliography.bib}
+
+\newpage
+\printnomenclature
+
 \end{document}
 
