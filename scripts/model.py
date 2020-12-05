@@ -1,31 +1,43 @@
 """
 ===============================
 Title: Goodwin-Keen Model
-Authors: Romi Lifshitz and Grant Forsythe
+Authors: Romi Lifshitz and Grant Forsyth
+Reference: https://ms.mcmaster.ca/~grasselli/goodwin.html
 ===============================
 """
-
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import scipy
-import os
-years = np.arange(1990,2009,1)
 
-def read_data():
-    PATH = os.path.join(os.getcwd(), 'data')
-    return pd.read_csv(os.path.join(PATH,'cleaned_data.csv'))
-
-percent = lambda x: x/100
-df  = read_data()
-df.set_index(years,inplace=True)
-print(df.apply(percent))
+phil0 = 0.04/(1-0.04**2)
+phil1 = 0.04**3/(1-0.04**2)
 
 # Constants
 alpha = 0.025       # Technological growth rate
 beta = 0.02         # Population growth rate
 delta = 0.01        # Deprecation rate
-k = None            # Acceleration relation for the total real capital stock
-phil_curve = None   # Phillips curve
+k = 0.05            # Acceleration relation for the total real capital stock
+phil_curve = lambda x: phil1/(1-x)**2-phil0   # Phillips curve
 r = 0.03            # Real interest rate
 v = 3               # Capital to output ratio
+
+
+def goodwin(y: list, t: np.array) -> np.array:
+    omega, Lambda = y
+
+    system = np.array([
+        omega * (phil_curve(Lambda) - alpha),               #dL/dt
+        Lambda * ((1 - omega) / v - alpha - beta - delta)   #dW/dt
+    ])
+
+    return system
+
+
+def goodwin_keen(y: list, t: np.array) -> np.array:
+    L, W, D = y
+
+    system = np.array([
+        L * (k * (1 - W - r * D) / v - alpha - beta - delta),                               # dL/dt
+        W * (phil_curve(L) - alpha),                                                        # dW/dt
+        D * (r - ((k * (1 - W - r * D)) / v + delta) + k * (1 - W - r * D) - (1 - W))])     # dR/dt
+
+    return (system)
+
