@@ -29,7 +29,7 @@
 \makenomenclature
 
 \title{The Evolution of the Goodwin Economics Model}
-\author{\qquad Romi Lifshitz$^{1}$ \qquad\  Arthur M\'endez-Rosales$^{2}$ \qquad\  Sara Saad$^{3}$ \\ Grant Forsythe$^{4}$ \qquad Ghida M. Mourtada$^{4}$ \qquad Jacob Ronen Keffer$^{5}$}
+\author{\qquad Romi Lifshitz$^{1}$ \qquad\  Arthur M\'endez-Rosales$^{2}$ \qquad\  Sara Saad$^{3}$ \\ Grant Forsythe$^{4}$ \qquad Gheeda Mourtada$^{4}$ \qquad Jacob Ronen Keffer$^{5}$}
 
 \date{
 {\footnotesize $^1$ Department of Arts and Science, McMaster University, ON, Canada\\[-6pt]
@@ -48,7 +48,8 @@ $^5$Department of Chemistry and Chemical Biology, McMaster University, ON, Canad
 \setcounter{page}{1}
 \section{Introduction} \label{s:intro}
 % you do not need an indent to start off a section
-Exogenous economics models are those that assume the economy is stable and operates in equilibrium, such that only external factors can cause a potential crash \citep{ganti_2019}. However, the real world reflects that a macro-economy can itself destabilize due to internal factors such as wage share, employment rate, and private debt \citep{minsky1992financial}. For this, R. M. Goodwin proposed an endogenous economics model in 1967 that, at its core, mimics Lotka-Volterra prey-predator dynamics \citep{goodwin1982growth}. The extension of Goodwin’s model by \citet{keen1995finance} focused on modeling Hayman Minsky’s “financial instability hypothesis”. In essence, Minsky argues that the economy can fall into a crisis given an accumulation of debt by the private sector \citep{minsky1992financial}. This Goodwin-Keen model looks into the impact of three parameters on a simplified macro economy: employment rate ($\lambda$), wage share ($\omega$), and private debt ($d$) \citep{grasselli2012analysis,maheshwari2015empirical}.
+
+Exogenous economics models are those that assume the economy is stable and operates in equilibrium, such that only external factors can cause a potential crash \citep{ganti_2019}. However, the real world reflects that a macro-economy can itself destabilize due to internal factors such as wage share, employment rate, and private debt \citep{minsky1992financial}. For this, R. M. Goodwin proposed an endogenous economics model in 1967 that, at its core, mimics Lotka-Volterra prey-predator dynamics \citep{goodwin1982growth}. The extension of Goodwin’s model by \citet{keen1995finance} focused on modeling Hayman Minsky’s “financial instability hypothesis”. In essence, Minsky argues that the economy can fall into a crisis given an accumulation of debt by the private sector \citep{minsky1992financial}. This Goodwin-Keen model looks into the impact of three parameters on a simplified macro-economy: employment rate ($\lambda$), wage share ($\omega$), and private debt ($d$) \citep{grasselli2012analysis,maheshwari2015empirical}.
 \section{Proposal} \label{s:proposal}
 Through the framework of endogenous economic fluctuation models \citep{boldrin1990equilibrium}, the potential long-term equilibrium of the Canadian economy is thoroughly investigated for the purposes of assessing the impact of wage share, employment rate, and private debt on economic stability. For the purposes of this project, economic stability is defined as the long-term equilibrium between labour share and employment \citep{weitzman1983some}. To do so, we use the Goodwin growth model and later the extension into the Goodwin-Keen model. While Goodwin’s original model seeks to explain the dynamics between wage share and employment \citep{goodwin1982growth}, Keen’s addendum to incorporate Minsky’s thesis aims to estimate the convergence of the economy to a stable or unstable long-term equilibrium by introducing the role of debt in the private sector \citep{keen1995finance}. These predictions will be made using previous data from Statistics Canada. The following equations describe the Goodwin-Keen model, as per \citet{grasselli2012analysis}. Please refer to the Nomenclature section for a description of used parameters \citep{grasselli2012analysis,maheshwari2015empirical}.
 % Equations are formatted based on Grasselli and Lima 2012, NOT Keen's original publication
@@ -56,13 +57,13 @@ Through the framework of endogenous economic fluctuation models \citep{boldrin19
 \centering
     \dv{\lambda}{t} &= \lambda \cdot \left( \frac{\kappa(1-\omega-rd)}{\nu} - \alpha - \beta - \delta \right)\\ 
     \dv{\omega}{t} &= \omega \cdot (\Phi(\lambda) - \alpha)\\
-    \dv{d}{t} &= d\cdot\left(r-\frac{\kappa(1-\omega-rd)}{\nu}+\delta\right)+\kappa(1-\omega-rd)-(1-\omega) 
+    \dv{d}{t} &= d\cdot\left(r-\frac{\kappa(1-\omega-rd)}{\nu}+\delta\right)+\kappa(1-\omega-rd)-(1-\omega). 
 \end{align*}
 
 \noindent We note that $\lambda(t)$ and $\omega(t)$ are unknowns; hence, we want to determine their behaviour as functions of time based on a set of initial conditions $(\lambda_0,\omega_0)$. Knowing these, we can assess the economic stability as defined by:
 \begin{equation*}
     \begin{split}
-        \bm{\varepsilon}=\lim_{t\to\infty}[\lambda(t), \omega(t)]
+        \bm{\varepsilon}=\lim_{t\to\infty}[\lambda(t), \omega(t)].
         % \label{eq:stability}
     \end{split}
 \end{equation*}
