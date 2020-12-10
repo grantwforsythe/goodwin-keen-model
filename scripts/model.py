@@ -1,7 +1,7 @@
 """
 ===============================
 Title: Goodwin-Keen Model
-Authors: Romi Lifshitz and Grant Forsyth
+Authors: Romi Lifshitz and Grant Forsythe
 Reference: https://ms.mcmaster.ca/~grasselli/goodwin.html
 ===============================
 """
@@ -40,7 +40,8 @@ def goodwin_keen(y: tuple, t: np.array, *args) -> np.array:
     system = np.array([
         Lambda * (kappa(1 - Omega - r * Debt) / v - alpha - beta - delta),                               # dL/dt
         Omega * (phil_curve(Lambda) - alpha),                                                        # dW/dt
-        Debt * (r - ((kappa(1 - Omega - r * Debt)) / v + delta) + kappa(1 - Omega - r * Debt) - (1 - Omega))])     # dR/dt
+        Debt * (r - kappa(1 - Omega - r * Debt)/ v + delta) + kappa(1 - Omega - r * Debt) - (1 - Omega)
+    ])     # dR/dt
 
     return system
 
@@ -55,5 +56,14 @@ def eq_goodwin() -> list:
 
     return solve(system, L, W)
 
+def eq_goodwin_keen() -> list:
+    Lambda, Omega, Debt = symbols('L W D')
 
+    system = np.array([
+        Lambda * (kappa(1 - Omega - r * Debt) / v - alpha - beta - delta),  # dL/dt
+        Omega * (phil_curve(Lambda) - alpha),  # dW/dt
+        Debt * (r - ((kappa(1 - Omega - r * Debt)) / v + delta) + kappa(1 - Omega - r * Debt) - (1 - Omega))
+    ])  # dR/dt
+
+    return solve(system, Lambda, Omega, Debt)
 

@@ -10,15 +10,15 @@ import scipy.integrate as integrate
 import scipy.optimize as optimize
 from sympy.solvers import solve
 from sympy import symbols
-from scripts.model import goodwin, goodwin_keen, eq_goodwin
+from scripts.model import goodwin, goodwin_keen, eq_goodwin, eq_goodwin_keen
 from scripts.read_data import read_data
 import os
 
 v, Φ, k, r, alpha, beta, delta = symbols('v  Φ(λ) k  r alpha beta  delta')
 dlam, domega, dd = symbols('λ^. ω^. d^.')
 
-time = np.arange(0,800,0.01)    # for integrating
-t = np.arange(0,19,1)           # for indexing purposes
+time = np.arange(0,300,0.01)    # for integrating
+index = np.arange(0,120,20)           # for indexing purposes
 df = read_data()
 
 
@@ -44,55 +44,42 @@ def plot(func: object, initial: tuple, file_name: str = '') -> None:
     ax.plot(time, result[:, 1], label=r'$\lambda$')
 
     if func == goodwin_keen:
-        ax.plot(time, result[:, 2], label=r'Debt')
+        ax.plot(time, result[:, 2], label=r'd')
+        ax.set_title(fr'$\lambda_0={initial[0]}$, $\omega_0={initial[1]}$, d=${initial[2]}$ ')
+    else:
+        ax.set_title(fr'$\omega_0={initial[0]}, \lambda_0={initial[1]}$')
 
+    # ax.set_xlim(left=1, right=101)
+    # ax.set_xticks(index)
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Rate')
-    ax.legend(loc=1)
+    ax.legend(loc=7)
 
     if file_name:
         PATH = os.path.join(os.getcwd(), 'imgs')
         my_file = f'{file_name}.svg'
         fig.savefig(os.path.join(PATH, my_file), dpi=1000)
     else:
+        fig = plt.figure(tight_layout = True)
+        axes = fig.add_subplot(111, projection = '3d')
+        axes.plot3D(result[:,1],result[:,0], c='blue', label='plot', linewidth=0.35)
+        axes.view_init(35,-25)
+        # axes.scatter(0.9686, 0.8349, c='red', label=r'($\omega^*,\lambda^*$)')
+        axes.set_title(fr'$\omega_0={initial[0]}, \lambda_0={initial[1]}, d_0={initial[2]}$')
+        axes.set_xlabel(r'$\omega$')
+        axes.set_ylabel(r'$\lambda$')
+        # axes.legend(loc=1)
+
+        PATH = os.path.join(os.getcwd(), 'imgs')
+        fig.savefig(os.path.join(PATH, 'goodwin_eq.svg'), dpi=1000)
         plt.show()
 
 ## TODO: Fix this up
 
-def errors(pars: tuple) -> int:
-    alpha, v = pars
-    sse = 0.0
-
-    y_hats = integrate.odeint(goodwin_keen, y0=[0.75, 0.75, 0.5], t=t, args=(alpha, v))  # ??Why is shape of y_hats = (28000, 3)
-
-    for act, est in zip(df.Lambda.values, y_hats[:,0]):
-        sse += (act - est) ** 2  # ?? Do I optimize all 3 equations at once or just one of them?
-
-    return sse
-
-
-# def simulate():
-#     quick_gen = (
-#         optimize.minimize(errors, (p, q), method='Nelder-Mead').x
-#         for p in np.linspace(0, 0.5, 5)
-#         for q in np.linspace(1.5, 4.5, 5)
-#     )
-#
-#     fig, (ax1, ax2) = plt.subplots(1, 2)
-#
-#     for x, y in quick_gen:
-#         print(x,y)
-#         ax1.hist(x, bins=100)
-#         ax2.hist(y, bins=100)
-#     ax1.set_title(r'$\alpha$')
-#     ax2.set_title('r')
-#     plt.show()
-
-
 if __name__ == '__main__':
-    plot(goodwin_keen, (0.8, 0.9,0.5),'goodwin_plot')
-    Lambda_star, Omega_star = eq_goodwin()[1]
-    print(Lambda_star, Omega_star)
+    plot(goodwin_keen, (0.75, 0.75,0.1))
+    # Lambda_star, Omega_star = eq_goodwin()[1]
+    # print(eq_goodwin_keen())
     # simulate()
 
 
