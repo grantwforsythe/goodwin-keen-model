@@ -1,15 +1,10 @@
 ## Table of contents
 * [General info](#general-info)
-* [To do](#todo)
 * [Technologies](#technologies)
 * [Setup](#setup)
 
 ## General info
-This project is for modeling enzymes kinematics.
-
-## TODO
-- [ ] this is an incomplete item
-- [x] this is a complete item
+Using a Goodwin and Goodwin-Keen model to model a macroeconomy.
 
 ## Technologies
 Project is created with:
