@@ -13,7 +13,6 @@ def sim_study():
     D_IC = np.linspace(0, 10, 10)
 
     results = []
-    count = 0
 
     for i in range(len(L_IC)):
         for j in range(len(W_IC)):
@@ -42,12 +41,13 @@ def sim_study_plot(sims):
     for i in range(len(sims)):
         coors = sims[i][0]
         if sims[i][2]:
-            axes.scatter(coors[0], coors[1], coors[2], c='Blue', s=25, label=r'C')
+            pG = axes.scatter(coors[0], coors[1], coors[2], c = 'Blue', s = 25, label = r'C')
         else:
-            axes.scatter(coors[0], coors[1], coors[2], c='Red', s=2, label=r'D', alpha=0.5)
-
+            pB = axes.scatter(coors[0], coors[1], coors[2], c = 'Red', s = 2, label = r'D', alpha = 0.5)
+    
     axes.set_xlabel(r'$\lambda$')
     axes.set_ylabel(r'$\omega$')
     axes.set_zlabel(r'$d$')
+    axes.legend([pG, pB], ['Convergent', 'Divergent'], numpoints = 1)
 
     plt.show()
