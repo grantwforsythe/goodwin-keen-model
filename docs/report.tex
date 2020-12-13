@@ -28,15 +28,22 @@
 \usepackage{authblk}
 \usepackage{lscape}
 \usepackage{physics}
+\usepackage{siunitx}
+\usepackage{svg}
+\usepackage{float}
 %\usepackage{floatrow}
 
 \usepackage{nomencl}
 \makenomenclature
 
+% Set default image directory
+\graphicspath{ {../imgs/} }  
+
 
 \renewcommand*\abstractname{Abstract}
 
 \title{The Evolution of the Goodwin Economics Model} % 
+% Suggested title: An Analytic and Numerical Study on the Goodwin and Goodwin-Keen Economics Modesl
 
 
 \author[1]{Romi Lifshitz}
@@ -66,21 +73,24 @@
 \maketitle
 \begin{abstract}
 % Example abstract. Source: https://arxiv.org/pdf/2011.14522.pdf
-As its width tends to infinity, a deep neural network’s behavior under gradientdescent can become simplified and predictable (e.g. given by the Neural TangentKernel (NTK)), if it is parametrized appropriately (e.g. the NTK parametrization). However, we show that the standard and NTK parametrizations of a neural network do not admit infinite-width limits that canlearnfeatures, which is crucial for pre-training and transfer learning such as with BERT. We propose simple modificationsto the standard parametrization to allow for feature learning in the limit.  UsingtheTensor Programstechnique, we derive explicit formulas for such limits. OnWord2Vec and few-shot learning on Omniglot via MAML, two canonical tasksthat rely crucially on feature learning, we compute these limits exactly. We findthat they outperform both NTK baselines and finite-width networks, with the latterapproaching the infinite-width feature learning performance as width increases...
+As its width tends to infinity, a deep neural network’s behavior under gradient descent can become simplified and predictable (e.g. given by the Neural TangentKernel (NTK)), if it is parametrized appropriately (e.g. the NTK parameterization). However, we show that the standard and NTK parameterizations of a neural network do not admit infinite-width limits that can learn features, which is crucial for pre-training and transfer learning such as with BERT. We propose simple modifications to the standard parameterization to allow for feature learning in the limit.  Using the Tensor Programs technique, we derive explicit formulas for such limits. Using OnWord2Vec and few-shot learning on Omniglot via MAML, two canonical tasksthat rely crucially on feature learning, we compute these limits exactly. We find that they outperform both NTK baselines and finite-width networks, with the latter approaching the infinite-width feature learning performance as width increases.
 
 % \noindent\textbf{Keywords}: UK Biobank, accelerometer data, matrix variate, telemetric data, Cox regression, hazard ratios, big data, high-dimensional data, large scale data processing.
+
 \end{abstract}
 \newpage % DONT FORGET TO REMOVE THIS. 
 
 \section{Introduction}
 % At least one page, at most page and a half.
 % Goodwin Model Paragraph
-\noindent Exogenous economics models are those that assume the economy is stable and operates in equilibrium, such that only external factors can cause a potential crash \citep{ganti_2019}. However, the real world reflects that a macro-economy can itself destabilize due to internal factors such as wage share, employment rate, and private debt, compounded by the systems put in place by governments to ensure stability \citep{minsky1992financial}. R. M. Goodwin proposed an endogenous economics model in 1967 that, at its core, mimics Lotka-Volterra prey-predator dynamics \citep{goodwin1982growth}. Many issues have been observed with this model since its conceptions \color{red}\textbf{CITE}\color{black} but nevertheless, many still agree that it holds value from a qualitative perspective as it draws attention to the dynamic behaviour of internal economic factors \citep{flaschel2016mathematical}. Goodwin model is described by
-\begin{align*}\label{eq:goodwin} 
-\centering
-    \dot{\lambda} &= \lambda \cdot \left( \frac{\kappa(1-\omega-rd)}{\nu} - \alpha - \beta - \delta \right), \\ 
+\noindent Exogenous economics models are those that assume the economy is stable and operates in equilibrium, such that only external factors can cause a potential crash \citep{ganti_2019}. However, the real world reflects that a macro-economy can itself destabilize due to internal factors, such as wage share, employment rate, and private debt, compounded by the systems placed by governments to ensure stability \citep{minsky1992financial}. In 1967, R. M. Goodwin proposed an endogenous economics model that, at its core, mimics Lotka-Volterra prey-predator dynamics \citep{goodwin1982growth}. Many issues have been observed with this model since its conception, \color{red}\textbf{CITE}\color{black} but nevertheless, many still agree that it holds value from a qualitative perspective as it draws attention to the dynamic behaviour of internal economic factors \citep{flaschel2016mathematical}. Goodwin model is described by
+\begin{equation}\label{eq:goodwin} 
+\begin{split}
+    % \dot{\lambda} &= \lambda \cdot \left( \frac{\kappa(1-\omega-rd)}{\nu} - \alpha - \beta - \delta \right), \\ % Function defined for Keen
+    \dot{\lambda} &= \lambda \cdot \left( \frac{1-\omega}{\nu} - \alpha - \beta - \delta \right), \\
     \dot{\omega} &= \omega \cdot (\Phi(\lambda) - \alpha).
-\end{align*}
+\end{split}
+\end{equation}
 
 % Minsky Hypothesis and the Goodwin-Keen Model Paragraph (TBD)
 
@@ -90,40 +100,68 @@ As its width tends to infinity, a deep neural network’s behavior under gradien
 % Closing Paragraph
 \noindent The following report considered the behaviour of the Goodwin model and Steve Keen’s expansion both from an isolated, analytical perspective, and as a tool to model real-world macroeconomics phenomena. The long term equilibrium for both models will be presented along with a brief parameter sensitivity study. Based on these results, numerical methods will be employed to fit employment rate data from the US from 1990 to 2008.
 
-
 \newpage % DONT FORGET TO REMOVE THIS. 
 
 \section{Methodology}
 % This is where you write your mathematical definitions, or dataset acquistions, and or cleaning of data. 
 % At most two pages, at least 1 page.
-Python \citep{rossum1995python} and various scientific packages were used to construct the models.
-
+Python \citep{rossum1995python} and various scientific packages were used to construct the models. The model parameters are in accordance with the assumptions used by \citet{grasselli2012analysis}\footnote{For reference, the whole project can be viewed \href{https://github.com/grantwforsythe/math3mb3}{here}.}. 
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Parameter }             & \textbf{Value}                                        \\
+\hline\hline
+$\alpha$  & $0.025$                                                  \\
+$\beta$   & $0.02$                                                   \\
+$\delta$  & $0.01$                                                      \\
+% $\Phi_0$  & $\frac{0.04}{1-0.04^2}$                                       \\
+% $\Phi_1$ & $\frac{0.04^3}{1-0.04^2}$                                   \\
+% $\Phi(x)$ & $\frac{\Phi_1}{(1-x)^2}-\Phi_0$ \\
+$\kappa(x)$               & $-0.065 + e^{-5+20x}$                            \\
+$r$                      & $0.03$                                                   \\
+$\nu$     & $3$                                                     \\
+\hline
+\end{tabular}
+\caption{Model Parameters}
+\label{table:parameters}
+\end{table}
 \subsection{Data Processing}
+Initially, data between 1990 to 2008 from the United States was collected from the OECD and World Bank \citep{employmentrate, wageshare, debt} with the purpose of conducting a sensitivity analysis for the Goodwin-Keen model. The nonlinear optimizer from the optimize sub-module in Scipy \citep{scipy} was optimizing one to two parameters at a given time. 
 
 \subsection{Goodwin Model}
-
-\[
+The Jacobian matrix of the Goodwin model system of equations presented as \eqref{eq:goodwin} is defined by
+\begin{equation*}
 \mathbf J =
 \begin{bmatrix}
-    \frac{d\lambda}{dt}\dot{\lambda} & \frac{d\omega}{dt}\dot{\lambda}\\[1ex]
-    \frac{d\lambda}{dt}\dot{\omega} & \frac{d\omega}{dt}\dot{\omega}
-\end{bmatrix}
-\]
+    \dv{\lambda}\dot{\lambda} & \dv{\omega}\dot{\lambda}\\[1ex]
+    \dv{\lambda}\dot{\omega} & \dv{\omega}\dot{\omega}
+\end{bmatrix}.
+\end{equation*}
+Note that in \eqref{eq:goodwin} the Philips curve $\Phi(\lambda)$ has not been explicitly defined. When the model was proposed \citep{goodwin1982growth}, this function was assumed to behave inversely proportional to as 
+\begin{equation*}
+    \Phi(\lambda) =\frac{\Phi_1}{(1-\lambda)^2}+\Phi_0.
+\end{equation*}
 
 \noindent
-It follows that:
+It follows that
 
+\begin{equation} \label{eq:jac_good}
+    \mathbf J = \begin{bmatrix}
+        \frac{1-\omega}{v}-\alpha-\beta-\delta & \frac{-\lambda}{v}\\[1ex]
+        \frac{2\Phi_1\omega}{(1-\lambda)^3} & \frac{\Phi_1}{(1-\lambda)^2}-\Phi_0-\alpha
+\end{bmatrix}.
+\end{equation}
+
+\noindent
+The stability of the model at equilibrium was determined by finding the eigenvalues of \eqref{eq:jac_good}. This was done by calling the \texttt{eig} method from the \texttt{linalg} submodule in NumPy \citep{2020NumPy-Array}, which returns the following complex vector:
 \[
-\mathbf J =
 \begin{bmatrix}
-    \frac{1-\omega}{v}-\alpha-\beta-\delta & \frac{-\lambda}{v}\\[1ex]
-    \frac{2}{(1-\lambda)^3}\Phi_1\omega & \frac{d\Phi_1}{(1-\lambda)^2}-\Phi_0
+    0.0125+1.05713232i & 0.0125-1.05713232i
 \end{bmatrix}
 \]
-
-
-\noindent
-Calling the \textit{solve} method within the SymPy libary \citep{SymPy}, it returns the symbolic solution\footnote{The first row is the trivial solution.}:
+Since both real parts are greater than zero, the model is Lyapunov stable at equilibrium.
+Calling the \texttt{solve} method within the SymPy libary \citep{SymPy} and taking $\Phi_1=15600^{-1}$ and $\Phi_0=25/624$, it returns the symbolic solution\footnote{The first row is the trivial solution.}:
 \[
 \begin{bmatrix}
     0.0 & 0.0\\[1ex]
@@ -136,72 +174,85 @@ Then, using the initial model parameters, the solution is:
 \[
 \begin{bmatrix}
     0.0 & 0.0\\[1ex]
-    0.968611758971283 & 0.834999999999999\\[1ex]
-    1.03138824102872 & 0.834999999999999 
+    \num{0.968611758971283} & \num{0.834999999999999}\\[1ex]
+    \num{1.03138824102872} & \num{0.834999999999999} 
 \end{bmatrix}
 \]
-Since it is not possible to have an employment rate greater one, the equilibrium points are:
-\begin{align*}
-    \omega^* &= 0.9686\\
-    \lambda^* &= 0.8349
-\end{align*}
-The stability of the model at equilibrium was determined by finding the eigen values of the Jacobian. This was done by calling the \textit{eig} method from the \textit{linalg} sub module in NumPy \citep{2020NumPy-Array}, which returns the following complex vector:
-\[
-\begin{bmatrix}
-    0.0125+1.05713232i & 0.0125-1.05713232i
-\end{bmatrix}
-\]
-Since both real parts are greater than zero, the model is Lyapunov stable at equilibrium.
-
+Since it is not possible to have an employment rate exceeding unity, the third row is ignored. Therefore, the equilibrium point must be:
+\begin{equation*}
+    \lambda^\ast = \num{0.9686}\text{, } \omega^\ast = \num{0.8349}
+\end{equation*}
 \subsection{Goodwin Keen Model}
 
 \begin{align*} 
 \centering
+    \dot{\lambda} &= \lambda \cdot \left( \frac{\kappa(1-\omega-rd)}{\nu} - \alpha - \beta - \delta \right),\\
     \dot{\omega} &= \omega \cdot (\Phi(\lambda) - \alpha),\\
-    \dot{\lambda} &= \lambda \cdot \left( \frac{\kappa(1-\omega-rd)}{\nu} - \alpha - \beta - \delta \right),\\ 
     \dot{d} &= d\cdot\left(r-\frac{\kappa(1-\omega-rd)}{\nu}+\delta\right)+\kappa(1-\omega-rd)-(1-\omega). 
 \end{align*}
 
-
-
 \subsection{Plot Construction}
+The Matplotlib \citep{matplotlib} graphic libary was used to generate the plots.
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.75]{plot_goodwin.svg}
+    \caption{Goodwin Model Behaviour}
+    \label{fig:goodwin}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.75]{goodwin_eq.svg}
+    \caption{Goodwin Equilibrium Phase Diagram}
+    \label{fig:goodwin_phase}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.75]{goodwin_keen_eq.svg}
+    \caption{Goodwin Keen Equilibrium Phase Diagram}
+    \label{fig:goodwin_phase}
+\end{figure}
+
 \newpage
 \section{Application}
-You need to talk about the results of your model. 
-\subsection{Simulation Study}
-If your model or problem set has parameters your change, this is where you would write about it. 
-Minimum 1 and a half pages. 
+% You need to talk about the results of your model. 
+% Refer to report_arthur_draft.tex
+
+% If your model or problem set has parameters your change, this is where you would write about it. 
+% Minimum 1 and a half pages. 
 
 \section{Conclusion}
-Housing Prices: Future projections show this, from the model. Then write about what the future results indicate. 
-SIR Model: If you decrease the infection rate by 20\%, you will get a peak decrease of 15\%. 
-Sport Statistics: This model indicates player outcomes for this and this team to win these type of games. 
-This is half a page long. 
+% Housing Prices: Future projections show this, from the model. Then write about what the future results indicate. 
+% SIR Model: If you decrease the infection rate by 20\%, you will get a peak decrease of 15\%. 
+% Sport Statistics: This model indicates player outcomes for this and this team to win these type of games. 
+% This is half a page long. 
 
-This is an example reference \cite{pocuca2020}, 
 
 \bibliographystyle{chicago}
 \bibliography{bibliography.bib}
 
 \newpage
 \mbox{}
-\nomenclature{$\lambda$}{Employment rate}
-\nomenclature{$\omega$}{Wage share}
-\nomenclature{$d$}{Debt ratio}
-\nomenclature{$L$}{Total labour employed}
-\nomenclature{$N$}{Total labour force}
-\nomenclature{$w$}{Real wages per unit of labour}
-\nomenclature{$a$}{Labour productivity}
-\nomenclature{$D$}{Amount of debt in real terms}
-\nomenclature{$Y$}{Total yearly Output}
-\nomenclature{$K$}{Capital stock}
+\nomenclature[1]{$\lambda$}{Employment rate}
+\nomenclature[2]{$\omega$}{Wage share}
+\nomenclature[3]{$d$}{Debt ratio}
+
+% \nomenclature{$L$}{Total labour employed}
+% \nomenclature{$N$}{Total labour force}
+% \nomenclature{$w$}{Real wages per unit of labour}
+% \nomenclature{$a$}{Labour productivity}
+% \nomenclature{$D$}{Amount of debt in real terms}
+% \nomenclature{$Y$}{Total yearly Output}
+% \nomenclature{$K$}{Capital stock}
+
 \nomenclature{$\kappa$}{Fixed acceleration relation for the total real capital stock}
 \nomenclature{$\beta$}{The population growth rate}
 \nomenclature{$\delta$}{Constant depreciation rate}
 \nomenclature{$\alpha$}{The exponential growth of disembodied productivity growth rate, Technological growth}
 \nomenclature{$r$}{Constant real interest rate}
-\nomenclature{$\Phi(\lambda)$}{Non-linear function of the rate of employment, Phillips curve}
+\nomenclature{$\Phi(\lambda)$}{Function of the rate of employment, Phillips curve}
 \printnomenclature
+
 \newpage
 \section*{Appendix}
+
 \end{document}
