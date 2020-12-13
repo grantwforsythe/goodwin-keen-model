@@ -66,24 +66,32 @@ def plot_num_goodwin(t: tuple , ICs: tuple, file_name: str = '') -> None:
     L_sol = result[:, 1]  # Employment Rate
     W_sol = result[:, 0]  # Wage Share
 
-    fig, ax = plt.subplots(tight_layout=True)
-
-    ax.set_xlim(left=t[0], right=t[-1] - 1)
+    golden_ratio = (1+np.sqrt(5))/2
+    H = 4.4
+    fig, ax = plt.subplots(figsize=(int(golden_ratio*H),H), tight_layout=True)
+    
     ax.set_title(fr'$\omega_0={ICs[0]}, \lambda_0={ICs[1]}$')
-    ax.plot(t, W_sol, label=r'$\omega$')
-    ax.plot(t, L_sol, label=r'$\lambda$')
+    ax.set_xlim( left=t[0], right=t[-1]-1)
+    
+    color = 'C0'
+    ax.set_ylabel(r'$\omega$', color=color)
+    ax.plot(t, W_sol, label=r'$\omega$', color=color)
+    ax.tick_params(axis='y', labelcolor=color)
+    
+    ax1 = ax.twinx()  # instantiate a second axes that shares the same x-axis
 
+    color = 'C1'
+    ax1.set_ylabel(r'$\lambda$', color=color)  # we already handled the x-label with ax1
+    ax.plot(t, L_sol, label=r'$\lambda$', color=color)
+    ax1.tick_params(axis='y', labelcolor=color)
+    
     ax.set_xlabel('Time (years)')
-    ax.set_ylabel('Rate')
-    ax.legend(loc=7)
 
     if file_name:
         my_file = f'{file_name}.svg'
         fig.savefig(os.path.join(PATH, my_file), dpi=1000)
 
     plt.show()
-
-
 
 
 def phase_plot_goodwin(t: tuple, ICs: tuple, eqm: tuple, file_name: str = '') -> None:
@@ -101,9 +109,13 @@ def phase_plot_goodwin(t: tuple, ICs: tuple, eqm: tuple, file_name: str = '') ->
     L_sol = result[:, 1]  # Employment Rate
     W_sol = result[:, 0]  # Wage Share
 
-    fig, axes = plt.subplots(tight_layout=True)
+    golden_ratio = (1+np.sqrt(5))/2
+    H = 4.4
+    fig, axes = plt.subplots(figsize=(int(golden_ratio*H),H), tight_layout=True)
+    
     axes.plot(L_sol, W_sol, c='blue', label='Transient', linewidth=0.35)
     axes.scatter(eqm[0], eqm[1], c='red', label=r'($\lambda^*, \omega^*$)')
+    
     axes.set_title(fr'$\omega_0={ICs[0]}, \lambda_0={ICs[1]}$')
     axes.set_xlabel(r'$\lambda$')
     axes.set_ylabel(r'$\omega$')

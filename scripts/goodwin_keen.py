@@ -125,21 +125,23 @@ def plot_num_keen(t: np.array, ICs: list, file_name: str = '') -> None:
     L_sol = result[:, 1]  # Employment Rate
     D_sol = result[:, 2]  # Debt Ratio
 
-    fig, ax = plt.subplots(tight_layout=True)
+    golden_ratio = (1+np.sqrt(5))/2
+    H = 4.4
+    fig, ax = plt.subplots(figsize=(int(golden_ratio*H),H), tight_layout=True)
     ax.set_title(fr'$\omega_0={ICs[0]}, \lambda_0={ICs[1]}, d_0={ICs[2]}$')
-    ax.set_xlim(left=t[0], right=t[-1] - 1)
-
+    ax.set_xlim( left=t[0], right=t[-1]-1)
+    
     lns_L = ax.plot(t, W_sol, label=r'$\omega$')
     lns_W = ax.plot(t, L_sol, label=r'$\lambda$')
     ax.set_ylabel('Rates')
-
+    
     ax1 = ax.twinx()  # instantiate a second axes that shares the same x-axis
 
-    color = 'Green'
+    color = 'C2'
     ax1.set_ylabel('Ratio', color=color)  # we already handled the x-label with ax1
     lns_D = ax1.plot(t, D_sol, label=r'$d$', color=color)
     ax1.tick_params(axis='y', labelcolor=color)
-
+    
     ax.set_xlabel('Time (years)')
     lns = lns_L + lns_W + lns_D
     labs = [l.get_label() for l in lns]
@@ -159,10 +161,13 @@ def phase_plot_keen(t: np.array, ICs: list, eqm: tuple, file_name: str = '') -> 
     L_sol = result[:, 1]  # Employment Rate
     D_sol = result[:, 2]  # Debt Ratio
 
-    fig = plt.figure(tight_layout=True)
-    axes = fig.add_subplot(111, projection='3d')
-    axes.plot3D(W_sol, L_sol, D_sol, c='blue', label='Transient', linewidth=0.5)
-    axes.view_init(45, -20)
+    golden_ratio = (1+np.sqrt(5))/2
+    H = 4.4
+    fig, axes = plt.subplots(figsize=(int(golden_ratio*H),H), tight_layout=True)
+    axes.set_axis_off()
+    axes = fig.add_subplot(111, projection = '3d')
+    axes.plot3D(W_sol,L_sol,D_sol, c='blue', label='Transient', linewidth=0.5)
+    axes.view_init(45,-20)
     axes.scatter(eqm[0], eqm[1], eqm[2], c='red', label=r'($\lambda^*, \omega^*, d^*$)')
     axes.scatter(ICs[0], ICs[1], ICs[2], c='green', label=r'($\lambda_0, \omega_0, d_0$)')
     axes.set_title(fr'$\omega_0={ICs[0]}, \lambda_0={ICs[1]}, d_0={ICs[2]}$')

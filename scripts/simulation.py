@@ -34,7 +34,9 @@ def sim_study():
 
 def sim_study_plot(sims):
 
-    fig = plt.figure(tight_layout=True)
+    golden_ratio = (1+np.sqrt(5))/2
+    H = 4.4
+    fig = plt.figure(figsize=(int(golden_ratio*H),H), tight_layout = True)
     axes = fig.add_subplot(111, projection='3d')
     axes.view_init(25, -75)
 
