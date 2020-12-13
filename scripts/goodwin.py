@@ -22,7 +22,6 @@ def num_goodwin(y, t):
     phil0 = 0.04 / (1 - 0.04 ** 2)
     phil1 = 0.04 ** 3 / (1 - 0.04 ** 2)
     phil_curve = lambda x: phil1 / (1 - x) ** 2 - phil0  # Phillips curve
-    r = 0.03  # Real interest rate
     v = 3  # Capital to output ratio
 
     system = np.array([W * (phil_curve(L) - alpha),
