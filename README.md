@@ -4,7 +4,7 @@
 * [Setup](#setup)
 
 ## General info
-Using a Goodwin and Goodwin-Keen model to model a macroeconomy.
+Using a Goodwin and Goodwin-Keen model to model a macroeconomy. This repo was created for a group project (Romi Lifshitz, Arthur M\'endez-Rosales, Sara Saad, Grant Forsythe, Gheeda Mourtada, and Jacob Ronen Keffer) for Math 3MB3 (McMaster). 
 
 ## Technologies
 Project is created with:
