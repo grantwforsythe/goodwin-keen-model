@@ -12,6 +12,7 @@ Project is created with:
 * Python version: 3.8
 	
 ## Setup
+### Virtual Environment
 It is a best practice to run program files in a virtual environment as
 it allows the program to run with it's own separate dependencies.
 
@@ -42,6 +43,12 @@ pip install -r requirements.txt
 To deactivate simply use the command:
 ```console
 deactivate
+```
+### Docker
+Alternatively *Docker* can be used to build this project.
+```docker
+docker build -t goodwin_keen .
+docker run -it --rm goodwin_keen
 ```
 
 ## Contributers
