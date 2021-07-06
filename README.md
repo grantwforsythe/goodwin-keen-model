@@ -1,10 +1,11 @@
 ## Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Setup](#setup)
+1. [Abstract](#abstract)
+2. [Technologies](#technologies)
+3. [Setup](#setup)
+4. [Contributers](#contributers)
 
-## General info
-Using a Goodwin and Goodwin-Keen model to model a macroeconomy. This repo was created for a group project (Romi Lifshitz, Arthur M\'endez-Rosales, Sara Saad, Grant Forsythe, Gheeda Mourtada, and Jacob Ronen Keffer) for Math 3MB3 (McMaster). Checkout our final report and presentation under the docs directory.
+## Abstract
+In every economy there exist many factors impacting long-term equilibria, some of which have been accounted for by various models.  Here, we examine the differences between the Goodwin and Goodwin-Keen models which seek to explain economic dynamics.  To do so, we present long-term equilibria and conduct a brief sensitivity study. The results illustrate that the Goodwin model presents only one realistic equilibrium, that the Goodwin-Keen model’s non-trivial solution is an extreme economic scenario, and that the long-term economic equilibria are impacted by the initial state variable conditions.  These findings motivate the pursuit of a deeper understanding of economic ynamics, as it paves the way for better predictions of economic events
 
 ## Technologies
 Project is created with:
@@ -42,3 +43,12 @@ To deactivate simply use the command:
 ```console
 deactivate
 ```
+
+## Contributers
+This project was in collaboration with:
+* <a href="mailto: mendezrm@mcmaster.ca">Athur d'Art</a>
+* [Romi Lifshitz](https://github.com/rolifshitz)
+* [Sara Saad](https://github.com/saads6)
+* [Grant Forsythe](https://github.com/grantwforsythe)
+* <a href="mailto: mourtadg@mcmaster.ca">Ghida M. Mourtada</a>
+* <a href="mailto: Kefferj@mcmaster.ca">Jacob Keffer</a>
