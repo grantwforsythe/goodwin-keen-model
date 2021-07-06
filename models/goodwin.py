@@ -1,17 +1,11 @@
+import os
 import numpy as np
-
+from sympy.solvers import solve
+import matplotlib.pyplot as plt
+from sympy import symbols, Matrix
 import scipy.integrate as integrate
 
-import matplotlib.pyplot as plt
-
-from sympy.solvers import solve
-from sympy import symbols
-from sympy import  Matrix
-
-
-import os
-
-PATH = os.path.join(os.getcwd(), 'imgs')
+PATH = os.path.join(os.getcwd(), 'static/imgs')
 
 def num_goodwin(y, t):
     W, L = y

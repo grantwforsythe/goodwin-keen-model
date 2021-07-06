@@ -1,13 +1,10 @@
 import numpy as np
-
-import matplotlib.pyplot as plt
-
 import sympy as sym
-
-from scripts.goodwin_keen import find_eqm_keen, eig_keen_val
-
+import matplotlib.pyplot as plt
+from .goodwin_keen import find_eqm_keen, eig_keen_val
 
 def sim_study():
+
     L_IC = np.linspace(0.6, 1, 10)
     W_IC = np.linspace(0.5, 1, 10)
     D_IC = np.linspace(0, 10, 10)

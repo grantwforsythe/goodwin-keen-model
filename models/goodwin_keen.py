@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sympy import symbols, Matrix
 import scipy.integrate as integrate
 
-PATH = os.path.join(os.getcwd(), 'imgs')
+PATH = os.path.join(os.getcwd(), 'static/imgs')
 
 def j_keen():
     """

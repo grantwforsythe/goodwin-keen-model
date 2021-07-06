@@ -1,10 +1,9 @@
 import numpy as np
-
-from sympy.solvers import solve
 from sympy import symbols
 from sympy import  Matrix
 from sympy import  simplify
 from sympy import init_printing
+from sympy.solvers import solve
 
 def j_goodwin():
     """
