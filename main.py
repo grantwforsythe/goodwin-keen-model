@@ -1,10 +1,10 @@
 import numpy as np
 
 # 100 Years Goodwin Model (Numerical Solution)
-from scripts.goodwin import plot_num_goodwin, eqm_goodwin_eval, phase_plot_goodwin
-from scripts.goodwin_keen import find_eqm_keen, phase_plot_keen, plot_num_keen
-from scripts.goodwin_symbolic import j_goodwin, eqm_goodwin, eig_goodwin, eig_goodwin_val
-from scripts.simulation import sim_study, sim_study_plot
+from models.goodwin import plot_num_goodwin, eqm_goodwin_eval, phase_plot_goodwin
+from models.goodwin_keen import find_eqm_keen, phase_plot_keen, plot_num_keen
+from models.goodwin_symbolic import j_goodwin, eqm_goodwin, eig_goodwin, eig_goodwin_val
+from models.simulation import sim_study, sim_study_plot
 
 if __name__ == '__main__':
     J_g = j_goodwin()
