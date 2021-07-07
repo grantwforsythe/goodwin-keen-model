@@ -3,13 +3,13 @@
 2. [Technologies](#technologies)
 3. [Setup](#setup)
 4. [Contributers](#contributers)
-5. [Acknowledgements](#acknowledgments)
+5. [Acknowledgements](#acknowledgements)
 
 ## Abstract
 In every economy there exist many factors impacting long-term equilibria, some of which have been accounted for by various models.  Here, we examine the differences between the Goodwin and Goodwin-Keen economic models which seek to explain economic dynamics.  To do so, we present long-term equilibria and conduct a brief sensitivity study. The results illustrate that the Goodwin model presents only one realistic equilibrium, that the Goodwin-Keen model’s non-trivial solution is an extreme economic scenario, and that the long-term economic equilibria are impacted by the initial state variable conditions.  These findings motivate the pursuit of a deeper understanding of economic ynamics, as it paves the way for better predictions of economic events
 
 ## Technologies
-Project is created with:
+Project was created with:
 * Python version: 3.8
 	
 ## Setup
