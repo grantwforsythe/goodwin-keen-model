@@ -1,0 +1,6 @@
+docs/
+static/
+.git 
+.gitignore
+*.md
+Dockerfile*
