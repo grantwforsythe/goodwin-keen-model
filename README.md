@@ -58,7 +58,7 @@ This project was in collaboration with:
 * [Romi Lifshitz](https://github.com/rolifshitz)
 * [Sara Saad](https://github.com/saads6)
 * [Grant Forsythe](https://github.com/grantwforsythe)
-* <a href="mailto: mourtadg@mcmaster.ca">Ghida M. Mourtada</a>
+* <a href="mailto: mourtadg@mcmaster.ca">Gheeda Mourtada</a>
 * <a href="mailto: Kefferj@mcmaster.ca">Jacob Keffer</a>
 
 ## Acknowledgements
